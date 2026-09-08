@@ -641,6 +641,12 @@ if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.
   navigator.serviceWorker.register('./sw.js')
     .then(() => console.log('[SW] registered'))
     .catch(err => console.error('[SW] failed:', err));
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (refreshing) return;
+    refreshing = true;
+    location.reload();
+  });
 }
 
 /* =========================================================
