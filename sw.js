@@ -12,25 +12,26 @@ const APP_SHELL = [
   './icons/icon-512.png'
 ];
 
-/* Install: cache app shell */
+/* Install: tidak menunggu network — biar SW aktif seketika (mudah terdeteksi) */
 self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then(cache => Promise.all(
-        APP_SHELL.map(url => cache.add(url).catch(() => {}))
-      ))
-      .then(() => self.skipWaiting())
-  );
+  event.waitUntil(self.skipWaiting());
 });
 
-/* Aktifkan: bersihkan cache lama */
+/* Aktifkan: bersihkan cache lama, claim kontrol langsung, lalu precache di background */
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys()
       .then(keys => Promise.all(keys.filter(k => k !== CACHE_NAME).map(k => caches.delete(k))))
       .then(() => self.clients.claim())
   );
+  precacheAppShell();
 });
+
+function precacheAppShell() {
+  caches.open(CACHE_NAME)
+    .then(cache => Promise.all(APP_SHELL.map(url => cache.add(url).catch(() => {}))))
+    .catch(() => {});
+}
 
 /* Fetch: cache-first untuk aset, network-first untuk navigasi */
 self.addEventListener('fetch', event => {
