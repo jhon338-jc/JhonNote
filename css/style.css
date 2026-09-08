@@ -283,6 +283,7 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px}
 .modal-actions .btn{flex:1;min-width:120px}
 .apk-steps{margin:6px 0 12px;padding-left:20px;display:flex;flex-direction:column;gap:8px}
 .apk-steps li::marker{color:var(--accent-3);font-weight:800}
+.apk-muted{font-size:.78rem;opacity:.7;margin-top:14px}
 #apk-install{display:none}
 .apk-alert{font-size:.82rem;border-radius:10px;padding:10px 12px}
 .apk-alert.warn{background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.35);color:#ffe08a}
