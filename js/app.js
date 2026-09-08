@@ -248,14 +248,12 @@ function cardHTML(n) {
 
   return `
   <article class="note-card ${pinned}" data-id="${n.id}">
-    <div class="note-pin-ribbon">
-      <button class="act-btn act-pin ${n.pinned ? 'on' : ''}" type="button" data-act="pin" title="${n.pinned ? 'Unpin' : 'Pin'}">
-        ${SVG.pin} <span>${n.pinned ? 'Dipin' : 'Pin'}</span>
-      </button>
-    </div>
     ${fSecU || fSecP || fSec3 || '<div class="field-sub" style="color:var(--muted)">Catatan kosong akan dihapus otomatis</div>'}
     ${metaRow}
     <div class="note-actions">
+      <button class="act-btn act-pin ${n.pinned ? 'on' : ''}" type="button" data-act="pin" title="${n.pinned ? 'Unpin' : 'Pin'}">
+        ${SVG.pin} <span>${n.pinned ? 'Dipin' : 'Pin'}</span>
+      </button>
       <button class="act-btn act-edit" type="button" data-act="edit">${SVG.edit} <span>Edit</span></button>
       <button class="act-btn act-trash" type="button" data-act="trash">${SVG.trash} <span>Hapus</span></button>
       <button class="act-btn act-del" type="button" data-act="del">${SVG.del} <span>Hapus Permanen</span></button>
@@ -543,24 +541,31 @@ $('#tgl-pass').addEventListener('click', () => {
 /* =========================================================
    PWA INSTALL
    ========================================================= */
+function doInstall() {
+  if (!deferredPrompt) return;
+  const p = deferredPrompt;
+  deferredPrompt = null;
+  p.prompt();
+  p.userChoice.catch(() => {}).then(() => {
+    $('#btn-install').hidden = true;
+    $('#menu-install').hidden = true;
+    $('#apk-install').style.display = 'none';
+  });
+}
+
 window.addEventListener('beforeinstallprompt', e => {
   e.preventDefault();
   deferredPrompt = e;
-  const btn = $('#btn-install');
-  btn.hidden = false;
+  $('#btn-install').hidden = false;
+  $('#menu-install').hidden = false;
 });
 
-$('#btn-install').addEventListener('click', async () => {
-  if (!deferredPrompt) return;
-  deferredPrompt.prompt();
-  try { await deferredPrompt.userChoice; } catch (err) {}
-  deferredPrompt = null;
-  $('#btn-install').hidden = true;
-});
+$('#btn-install').addEventListener('click', doInstall);
 
 window.addEventListener('appinstalled', () => {
   deferredPrompt = null;
   $('#btn-install').hidden = true;
+  $('#menu-install').hidden = true;
   toast('Aplikasi berhasil di-install!', '🎉');
 });
 
@@ -573,13 +578,7 @@ function openApkModal() {
 
   const btnInstall = $('#apk-install');
   btnInstall.style.display = deferredPrompt ? '' : 'none';
-  btnInstall.onclick = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    try { await deferredPrompt.userChoice; } catch (err) {}
-    deferredPrompt = null;
-    btnInstall.style.display = 'none';
-  };
+  btnInstall.onclick = doInstall;
 
   if (!online) {
     alertEl.className = 'apk-alert warn';
@@ -601,6 +600,41 @@ $('#modal-apk').addEventListener('click', e => {
   if (e.target === $('#modal-apk')) {
     $('#modal-apk').hidden = true;
     document.body.classList.remove('no-scroll');
+  }
+});
+
+/* =========================================================
+   KEBAB MENU (⋯)
+   ========================================================= */
+const btnMenu = $('#btn-menu');
+const menuEl = $('#menu');
+
+function closeMenu() {
+  menuEl.hidden = true;
+  btnMenu.setAttribute('aria-expanded', 'false');
+}
+
+btnMenu.addEventListener('click', e => {
+  e.stopPropagation();
+  if (menuEl.hidden) {
+    menuEl.hidden = false;
+    btnMenu.setAttribute('aria-expanded', 'true');
+  } else {
+    closeMenu();
+  }
+});
+
+document.addEventListener('click', closeMenu);
+
+$('#menu').addEventListener('click', e => {
+  const item = e.target.closest('[data-menu-action]');
+  if (!item) return;
+  closeMenu();
+  switch (item.dataset.menuAction) {
+    case 'install': doInstall(); break;
+    case 'trash': goTrash(); break;
+    case 'apk': openApkModal(); break;
+    case 'about': toast('Jhon Note v2.1 • Developer: JHON338', '📌'); break;
   }
 });
 
@@ -634,5 +668,5 @@ document.addEventListener('visibilitychange', () => { if (!document.hidden) { pu
 
 /* Escape menu & tutup modal */
 document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') { closeModal(); $('#modal-apk').hidden = true; document.body.classList.remove('no-scroll'); }
+  if (e.key === 'Escape') { closeModal(); closeMenu(); $('#modal-apk').hidden = true; document.body.classList.remove('no-scroll'); }
 });

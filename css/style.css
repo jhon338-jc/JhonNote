@@ -116,6 +116,18 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px}
 .btn svg{width:17px;height:17px}
 .btn-save{flex:1}
 #btn-install{color:var(--accent-3);border-color:rgba(34,211,238,.4);background:rgba(34,211,238,.08)}
+#btn-menu{color:var(--muted)}
+
+/* ---------- Kebab menu (⋯) ---------- */
+.menu-wrap{position:relative}
+.menu{position:absolute;top:calc(100% + 10px);right:0;z-index:120;min-width:210px;
+  background:linear-gradient(170deg,var(--card-2),var(--bg-2));border:1px solid var(--stroke);
+  border-radius:14px;padding:6px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:2px;
+  animation:pop .18s ease}
+.menu button{display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:10px;
+  font-size:.9rem;font-weight:600;color:var(--text);width:100%;text-align:left;transition:background .15s}
+.menu button:hover{background:rgba(255,255,255,.08)}
+.menu button svg{width:18px;height:18px;flex:none;color:var(--accent-3)}
 
 /* ---------- Search ---------- */
 .search-row{display:flex;align-items:center;gap:12px;margin-top:12px}
@@ -153,7 +165,6 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px}
   content:"";position:absolute;top:0;left:22px;right:22px;height:3px;border-radius:0 0 6px 6px;
   background:linear-gradient(90deg,var(--accent-3),var(--accent-1),var(--accent-2));
 }
-.note-pin-ribbon{position:absolute;top:14px;right:14px;z-index:2}
 
 /* fields inside card */
 .field{display:flex;align-items:center;gap:11px;min-width:0}
@@ -294,9 +305,7 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px}
    ========================================================= */
 @media (max-width:600px){
   .header-top{flex-wrap:wrap}
-  #btn-apk span{display:none}
-  #btn-apk{padding:9px;width:40px;height:40px;border-radius:11px}
-  #btn-apk svg{width:19px;height:19px}
+  #btn-apk,#btn-trash{display:none}
   .count-chip{display:none}
   .note-list{grid-template-columns:1fr}
   .form-actions{flex-direction:column}
