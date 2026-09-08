@@ -247,8 +247,7 @@ function render() {
     $('#empty-title').textContent = q ? 'Tidak Ditemukan' : 'Belum Ada Catatan';
     $('#empty-desc').innerHTML = q
       ? 'Tidak ada catatan cocok dengan "<b>' + esc(filter) + '</b>".'
-      : 'Klik tanda <b>+</b> untuk buat catatan.';
-    $('#empty-add').hidden = !!q;
+      : 'Klik tanda <b>+</b> di kanan bawah untuk buat catatan.';
     return;
   }
   empty.hidden = true;
@@ -484,6 +483,8 @@ const contactsBox = $('#contact-list'), linksBox = $('#link-list');
 function setType(t) {
   formType = t;
   $$('#type-seg .seg').forEach(b => b.classList.toggle('active', b.dataset.type === t));
+  $('#block-akun').hidden = (t === 'full');
+  $('#block-caption').hidden = (t !== 'full');
 }
 $('#type-seg').addEventListener('click', e => {
   const b = e.target.closest('.seg');
@@ -581,7 +582,6 @@ $('#btn-trash-back').addEventListener('click', goMain);
 $('#btn-trash-clear').addEventListener('click', clearTrash);
 $('#btn-form-back').addEventListener('click', goMain);
 $('#btn-cancel').addEventListener('click', goMain);
-$('#empty-add').addEventListener('click', goForm);
 
 $('#search').addEventListener('input', e => {
   filter = e.target.value;

@@ -12,7 +12,7 @@
 <link rel="manifest" href="manifest.json">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23080c18'/%3E%3Crect x='16' y='16' width='32' height='32' rx='9' fill='url(%23g)'/%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2338bdf8'/%3E%3Cstop offset='.55' stop-color='%235b8cff'/%3E%3Cstop offset='1' stop-color='%23a78bfa'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='22' y='22' width='20' height='4' rx='2' fill='white' opacity='.9'/%3E%3Crect x='22' y='29' width='14' height='4' rx='2' fill='white' opacity='.9'/%3E%3Crect x='22' y='36' width='20' height='4' rx='2' fill='white' opacity='.9'/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 </head>
 <body>
 
@@ -47,7 +47,7 @@
         <svg viewBox="0 0 64 64" width="38" height="38"><rect x="2" y="2" width="60" height="60" rx="16" fill="#111a33"/><rect x="16" y="16" width="32" height="32" rx="9" fill="url(#lg)"/><rect x="22" y="22" width="20" height="4.5" rx="2.2" fill="#fff" opacity=".95"/><rect x="22" y="30" width="13" height="4.5" rx="2.2" fill="#fff" opacity=".95"/><rect x="22" y="38" width="20" height="4.5" rx="2.2" fill="#fff" opacity=".95"/></svg>
         <div>
           <div class="brand-name">Jhon <b>Note</b></div>
-          <div class="brand-dev">JHON338</div>
+          <div class="brand-dev">JHON338 · v5</div>
         </div>
       </div>
       <div class="header-actions">
@@ -92,11 +92,7 @@
     <div id="empty-state" class="empty-state" hidden>
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
       <h2 id="empty-title">Belum Ada Catatan</h2>
-      <p id="empty-desc">Klik tombol <b>+</b> untuk buat catatan pertama.</p>
-      <button class="btn btn-primary" id="empty-add" type="button">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
-        Tambah Catatan
-      </button>
+      <p id="empty-desc">Klik tanda <b>+</b> di kanan bawah untuk buat catatan.</p>
     </div>
   </main>
 
@@ -140,9 +136,10 @@
             Lengkap
           </button>
         </div>
-        <p class="field-note">Lengkap = bisa dibagikan &amp; dicetak (A4).</p>
+        <p class="field-note">Lengkap = hanya caption, bisa dibagikan &amp; dicetak (A4).</p>
       </div>
 
+      <div id="block-akun">
       <div class="field-block">
         <label for="in-user">Username / Akun</label>
         <div class="input-wrap">
@@ -183,11 +180,12 @@
           Tambah Link
         </button>
       </div>
+      </div>
 
-      <div class="field-block">
-        <label for="in-caption">Caption</label>
-        <textarea id="in-caption" rows="5" placeholder="Tulis teks bebas apa pun di sini..." spellcheck="false"></textarea>
-        <p class="field-note">Opsional, bebas jumlah huruf &amp; angka.</p>
+      <div class="field-block" id="block-caption" hidden>
+        <label for="in-caption">Caption Full</label>
+        <textarea id="in-caption" rows="10" placeholder="Tulis teks bebas apa pun di sini..." spellcheck="false"></textarea>
+        <p class="field-note">Teks bebas, sepanjang apa pun.</p>
       </div>
 
       <div class="form-actions">
@@ -301,6 +299,6 @@
 <div id="tip" class="tip" role="tooltip"></div>
 <div id="toast" class="toast" role="status"></div>
 
-<script src="js/app.js?v=4"></script>
+<script src="js/app.js?v=5"></script>
 </body>
 </html>
