@@ -1,7 +1,7 @@
 /* Jhon Note · JHON338 — Service Worker (offline PWA) */
 'use strict';
 
-const CACHE_NAME = 'jhon-note-v1';
+const CACHE_NAME = 'jhon-note-v2';
 const APP_SHELL = [
   './',
   './index.html',
