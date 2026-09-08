@@ -1,13 +1,13 @@
 /* Jhon Note · JHON338 — Service Worker (offline PWA) */
 'use strict';
 
-const CACHE_NAME = 'jhon-note-v4';
+const CACHE_NAME = 'jhon-note-v5';
 const APP_SHELL = [
   './',
   './index.html',
   './manifest.json',
-  './css/style.css?v=3',
-  './js/app.js?v=3',
+  './css/style.css?v=4',
+  './js/app.js?v=4',
   './icons/icon-192.png',
   './icons/icon-512.png'
 ];
