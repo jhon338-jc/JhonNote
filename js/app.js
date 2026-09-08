@@ -608,9 +608,9 @@ $('#modal-apk').addEventListener('click', e => {
    SERVICE WORKER
    ========================================================= */
 if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1')) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').catch(() => {});
-  });
+  navigator.serviceWorker.register('./sw.js')
+    .then(() => console.log('[PWA] Service worker registered'))
+    .catch(err => console.error('[PWA] Service worker registration failed:', err));
 }
 
 /* =========================================================
