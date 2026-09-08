@@ -1,0 +1,47 @@
+{
+  "name": "Jhon Note — JHON338",
+  "short_name": "Jhon Note",
+  "description": "Aplikasi catatan permanen: simpan username, password, email, nomor HP, dan link. Dibuat oleh JHON338.",
+  "id": "jhon-note-jhon338",
+  "lang": "id",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#0a0e1a",
+  "background_color": "#0a0e1a",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Tambah Catatan",
+      "url": "./?new=1",
+      "description": "Buka form tambah catatan baru"
+    },
+    {
+      "name": "Folder Sampah",
+      "url": "./?trash=1",
+      "description": "Lihat folder sampah"
+    }
+  ]
+}
