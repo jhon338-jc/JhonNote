@@ -115,7 +115,6 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px}
 .icon-only svg{width:19px;height:19px}
 .btn svg{width:17px;height:17px}
 .btn-save{flex:1}
-#btn-install{color:var(--accent-3);border-color:rgba(34,211,238,.4);background:rgba(34,211,238,.08)}
 #btn-menu{color:var(--muted)}
 
 /* ---------- Kebab menu (⋯) ---------- */
@@ -281,10 +280,6 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px}
 .modal-msg p{margin-bottom:10px}
 .modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
 .modal-actions .btn{flex:1;min-width:120px}
-.apk-steps{margin:6px 0 12px;padding-left:20px;display:flex;flex-direction:column;gap:8px}
-.apk-steps li::marker{color:var(--accent-3);font-weight:800}
-.apk-muted{font-size:.78rem;opacity:.7;margin-top:14px}
-#apk-install{display:none}
 .apk-alert{font-size:.82rem;border-radius:10px;padding:10px 12px}
 .apk-alert.warn{background:rgba(255,209,102,.1);border:1px solid rgba(255,209,102,.35);color:#ffe08a}
 .apk-alert.ok{background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.35);color:#7df6cf}
@@ -306,7 +301,10 @@ code{background:rgba(255,255,255,.08);padding:1px 6px;border-radius:6px}
    ========================================================= */
 @media (max-width:600px){
   .header-top{flex-wrap:wrap}
-  #btn-apk,#btn-trash{display:none}
+  #btn-apk span{display:none}
+  #btn-apk{padding:9px;width:40px;height:40px;border-radius:11px}
+  #btn-apk svg{width:19px;height:19px}
+  #btn-trash{display:none}
   .count-chip{display:none}
   .note-list{grid-template-columns:1fr}
   .form-actions{flex-direction:column}

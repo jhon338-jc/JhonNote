@@ -19,7 +19,6 @@ let filter = '';
 const shownPass = new Set();   // id catatan yang passwordnya sedang terlihat
 let editId = null;
 let pendingConfirm = null;
-let deferredPrompt = null;
 
 /* ---------- SVG icons ---------- */
 const SVG = {
@@ -539,53 +538,18 @@ $('#tgl-pass').addEventListener('click', () => {
 });
 
 /* =========================================================
-   PWA INSTALL
-   ========================================================= */
-function doInstall() {
-  if (!deferredPrompt) return;
-  const p = deferredPrompt;
-  deferredPrompt = null;
-  p.prompt();
-  p.userChoice.catch(() => {}).then(() => {
-    $('#btn-install').hidden = true;
-    $('#menu-install').hidden = true;
-    $('#apk-install').style.display = 'none';
-  });
-}
-
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  deferredPrompt = e;
-  $('#btn-install').hidden = false;
-  $('#menu-install').hidden = false;
-});
-
-$('#btn-install').addEventListener('click', doInstall);
-
-window.addEventListener('appinstalled', () => {
-  deferredPrompt = null;
-  $('#btn-install').hidden = true;
-  $('#menu-install').hidden = true;
-  toast('Aplikasi berhasil di-install!', '🎉');
-});
-
-/* =========================================================
    MODAL APK
    ========================================================= */
 function openApkModal() {
   const alertEl = $('#apk-alert');
   const online = location.protocol === 'https:' || location.hostname === 'localhost' || location.hostname === '127.0.0.1';
 
-  const btnInstall = $('#apk-install');
-  btnInstall.style.display = deferredPrompt ? '' : 'none';
-  btnInstall.onclick = doInstall;
-
   if (!online) {
     alertEl.className = 'apk-alert warn';
-    alertEl.innerHTML = '⚠️ Website dibuka dari <b>file lokal</b> atau belum di-hosting.<br>Upload semua file ke hosting online (Netlify/Vercel/GitHub Pages) terlebih dahulu agar bisa dibuat APK & PWA.';
+    alertEl.innerHTML = '⚠️ Website dibuka dari <b>file lokal</b>. Buka lewat <b>https://jhon-note.vercel.app</b> biar bisa download APK.';
   } else {
     alertEl.className = 'apk-alert ok';
-    alertEl.innerHTML = '✅ Website aktif. Buka PWABuilder, masukkan URL <code>' + escapeHtml(location.href) + '</code> lalu pilih Android → Package.';
+    alertEl.innerHTML = '✅ APK <b>Jhon Note</b> siap di-download. Tombolnya di bawah.';
   }
   $('#modal-apk').hidden = false;
   document.body.classList.add('no-scroll');
@@ -631,9 +595,7 @@ $('#menu').addEventListener('click', e => {
   if (!item) return;
   closeMenu();
   switch (item.dataset.menuAction) {
-    case 'install': doInstall(); break;
     case 'trash': goTrash(); break;
-    case 'apk': openApkModal(); break;
     case 'about': toast('Jhon Note v2.1 • Developer: JHON338', '📌'); break;
   }
 });
